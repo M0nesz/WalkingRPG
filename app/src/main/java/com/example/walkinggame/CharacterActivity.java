@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 
-public class GameActivity extends AppCompatActivity {
+public class CharacterActivity extends AppCompatActivity {
     String selectedOption = "";
     private void saveDataToJsonFile(JSONObject data) {
         try {
@@ -32,7 +32,7 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.game_activity);
+        setContentView(R.layout.character_view_activity);
 
         EditText userName = findViewById(R.id.userName);
         ToggleButton toggleButton = findViewById(R.id.toggleButton);
@@ -59,7 +59,7 @@ public class GameActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
             saveDataToJsonFile(data);
-            Intent intent = new Intent(GameActivity.this, GameActivity.class);
+            Intent intent = new Intent(CharacterActivity.this, MainActivity.class);
             startActivity(intent);
         });
     }

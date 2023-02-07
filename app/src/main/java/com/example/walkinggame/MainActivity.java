@@ -1,36 +1,45 @@
 package com.example.walkinggame;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.TextView;
+import android.widget.Button;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-
 
 public class MainActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        try {
-            InputStream inputStream = new FileInputStream("path/to/file.json");
-            int size = inputStream.available();
-            byte[] buffer = new byte[size];
-            inputStream.read(buffer);
-            inputStream.close();
-            String jsonString = new String(buffer, "UTF-8");
-            JSONObject json = new JSONObject(jsonString);
-            String userNameValue = json.getString("userName");
-            String selectedOptionValue = json.getString("selectedOption");
 
-        } catch (IOException | JSONException e) {
-            e.printStackTrace();
-        }
+        Button character_button = findViewById(R.id.character_button);
+        Button action_button = findViewById(R.id.action_button);
+        Button map_button = findViewById(R.id.map_button);
+        Button inventory_button = findViewById(R.id.inventory_button);
+        Button log_button = findViewById(R.id.log_button);
+
+
+        action_button.setOnClickListener(view -> {
+
+        });
+        character_button.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, CharacterActivity.class);
+            startActivity(intent);
+        });
+        map_button.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, MapActivity.class);
+            startActivity(intent);
+        });
+        inventory_button.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, InventoryViewActivity.class);
+            startActivity(intent);
+        });
+        log_button.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, LogActivity.class);
+            startActivity(intent);
+        });
     }
 }
