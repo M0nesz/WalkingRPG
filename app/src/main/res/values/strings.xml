@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Walkinggame</string>
+    <string name="what_s_your_username">What\'s your username?</string>
+    <string name="name">Name</string>
+    <string name="todo">TODO</string>
+    <string name="warrior">Warrior</string>
+    <string name="mage">Mage</string>
+    <string name="play">Play</string>
+    <string name="coins">Coins:</string>
+    <string name="_0">0</string>
+    <string name="welcome">Welcome!</string>
+    <string name="walk">Walk</string>
+    <string name="map">Map</string>
+    <string name="inventory">Inventory</string>
+    <string name="log">Log</string>
+</resources>
