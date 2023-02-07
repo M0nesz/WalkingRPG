@@ -5,8 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+
 
 
 public class MainActivity extends AppCompatActivity {
