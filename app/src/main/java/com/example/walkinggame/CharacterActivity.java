@@ -11,7 +11,6 @@ import android.widget.ToggleButton;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -82,9 +81,9 @@ public class CharacterActivity extends AppCompatActivity {
         });
         cancelButton.setOnClickListener(View -> {
 
-            cancelConfirmationTextview.setVisibility(View.VISIBLE);
-            cancelNo.setVisibility(View.VISIBLE);
-            cancelYes.setVisibility(View.VISIBLE);
+            cancelConfirmationTextview.setVisibility(android.view.View.VISIBLE);
+            cancelNo.setVisibility(android.view.View.VISIBLE);
+            cancelYes.setVisibility(android.view.View.VISIBLE);
 
             cancelYes.setOnClickListener(View2 ->{
                 Intent intent = new Intent(CharacterActivity.this, MainActivity.class);
@@ -92,9 +91,9 @@ public class CharacterActivity extends AppCompatActivity {
             });
             cancelNo.setOnClickListener(View3 ->{
 
-                cancelConfirmationTextview.setVisibility(View.INVISIBLE);
-                cancelNo.setVisibility(View.INVISIBLE);
-                cancelYes.setVisibility(View.INVISIBLE);
+                cancelConfirmationTextview.setVisibility(android.view.View.INVISIBLE);
+                cancelNo.setVisibility(android.view.View.INVISIBLE);
+                cancelYes.setVisibility(android.view.View.INVISIBLE);
             });
         });
     }
