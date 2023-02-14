@@ -62,11 +62,6 @@ public class CharacterActivity extends AppCompatActivity {
                 // Insert user into the database
                 DatabaseHelper dbHelper = new DatabaseHelper(this);
                 boolean success = dbHelper.insertUser(userNameString, player_class);
-                if (success) {
-                    Log.d("CharacterActivity", "Successful insert");
-                } else {
-                    Log.d("CharacterActivity", "Unsuccessful insert");
-                }
                 dbHelper.close();
             } else {
                 // Display an error message if the username is too long

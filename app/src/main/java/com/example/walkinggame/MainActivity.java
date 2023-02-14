@@ -1,5 +1,4 @@
 package com.example.walkinggame;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.Cursor;
@@ -10,6 +9,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
                     String playerClass = userDataCursor.getString(playerClassColumnIndex);
 
                     // Update the TextView with the retrieved data
-                    kecske.setText("Username: " + username + "\nPlayer class: " + playerClass);
+                    kecske.setText( username + "\n" + playerClass);
                 } else {
                     // If the Cursor does not contain the necessary columns, display an error message
                     kecske.setText("Error: database schema does not match expected schema");
@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             // Close the Cursor and the database connection
+            assert userDataCursor != null;
             userDataCursor.close();
             dbHelper.close();
         });

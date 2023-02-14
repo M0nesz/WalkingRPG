@@ -38,10 +38,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public boolean insertUser(String username, String player_class) {
         SQLiteDatabase db = this.getWritableDatabase();
+
+        // Check if a row with id=1 already exists
+        Cursor cursor = db.rawQuery("SELECT * FROM user WHERE id=1", null);
+        boolean exists = cursor.moveToFirst();
+        cursor.close();
+
+        // Insert or update the row based on whether it already exists
         ContentValues contentValues = new ContentValues();
         contentValues.put("username", username);
         contentValues.put("player_class", player_class);
-        db.insert("user", null, contentValues);
+        if (exists) {
+            db.update("user", contentValues, "id=?", new String[] { "1" });
+        } else {
+            contentValues.put("id", 1);
+            db.insert("user", null, contentValues);
+        }
+
         return true;
     }
     public Cursor getData(int id) {
