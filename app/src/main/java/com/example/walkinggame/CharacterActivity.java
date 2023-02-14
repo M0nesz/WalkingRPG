@@ -3,94 +3,93 @@ package com.example.walkinggame;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.FileOutputStream;
-import java.io.IOException;
-
-
 public class CharacterActivity extends AppCompatActivity {
-    String selectedOption = "";
 
-    private void saveDataToJsonFile(JSONObject data) {
-        try {
-            FileOutputStream fos = openFileOutput("player_save.json", MODE_PRIVATE);
-            fos.write(data.toString().getBytes());
-            fos.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    // Declare a variable to store the user's selected option
+    String player_class = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.character_view_activity);
 
-        EditText userName = findViewById(R.id.userName);
+        // Get references to all the views in the layout
+        EditText username = findViewById(R.id.userName);
         ToggleButton toggleButton = findViewById(R.id.toggleButton);
         Button playButton = findViewById(R.id.play_button);
-        TextView characterLimitText =  findViewById(R.id.character_limit);
+        TextView characterLimitText = findViewById(R.id.character_limit);
         TextView cancelConfirmationTextview = findViewById(R.id.confirmation_textview);
         Button cancelYes = findViewById(R.id.confirmation_yes);
         Button cancelNo = findViewById(R.id.confirmation_no);
         Button cancelButton = findViewById(R.id.cancel_button);
         TextView saved = findViewById(R.id.saved_textview);
+        TextView error = findViewById(R.id.error);
 
+        // Hide the cancel confirmation views and the saved textview initially
         cancelConfirmationTextview.setVisibility(View.INVISIBLE);
         cancelNo.setVisibility(View.INVISIBLE);
         cancelYes.setVisibility(View.INVISIBLE);
         saved.setVisibility(View.INVISIBLE);
+        // Hide the character limit textview and error textview initially
+        characterLimitText.setVisibility(View.INVISIBLE);
+        error.setVisibility(View.INVISIBLE);
 
+        // Set the toggle button text to show "Warrior" and "Mage"
         toggleButton.setTextOn("Warrior");
         toggleButton.setTextOff("Mage");
 
+        // Add a listener to the toggle button to store the user's selection
         toggleButton.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                selectedOption = "Warrior";
+                player_class = "Warrior";
             } else {
-                 selectedOption = "Mage";
+                player_class = "Mage";
             }
         });
 
-
         playButton.setOnClickListener(view -> {
-            int userNameLenght = userName.length();
-            if (userNameLenght <= 30){
-                String userNameSave = userName.getText().toString();
-                final JSONObject data = new JSONObject();
-                try {
-                    data.put("userName", userNameSave);
-                    data.put("selectedOption", selectedOption);
-                } catch (JSONException e) {
-                    e.printStackTrace();
+            // Get the string value of the user's entered username
+            String userNameString = username.getText().toString();
+            // Check if the username is less than or equal to 30 characters
+            if (userNameString.length() <= 30) {
+                // Insert user into the database
+                DatabaseHelper dbHelper = new DatabaseHelper(this);
+                boolean success = dbHelper.insertUser(userNameString, player_class);
+                if (success) {
+                    Log.d("CharacterActivity", "Successful insert");
+                } else {
+                    Log.d("CharacterActivity", "Unsuccessful insert");
                 }
-                saveDataToJsonFile(data);
-                saved.setVisibility(View.VISIBLE);
-            }
-            else{
+                dbHelper.close();
+            } else {
+                // Display an error message if the username is too long
                 characterLimitText.setVisibility(View.VISIBLE);
             }
         });
-        cancelButton.setOnClickListener(View -> {
 
+        cancelButton.setOnClickListener(View -> {
+            // Display the cancel confirmation text and buttons
             cancelConfirmationTextview.setVisibility(android.view.View.VISIBLE);
             cancelNo.setVisibility(android.view.View.VISIBLE);
             cancelYes.setVisibility(android.view.View.VISIBLE);
 
-            cancelYes.setOnClickListener(View2 ->{
+            // Set a click listener for the 'yes' button
+            cancelYes.setOnClickListener(View2 -> {
+                // Create an Intent to return to the MainActivity
                 Intent intent = new Intent(CharacterActivity.this, MainActivity.class);
                 startActivity(intent);
             });
-            cancelNo.setOnClickListener(View3 ->{
 
+            // Set a click listener for the 'no' button
+            cancelNo.setOnClickListener(View3 -> {
+                // Hide the cancel confirmation text and buttons
                 cancelConfirmationTextview.setVisibility(android.view.View.INVISIBLE);
                 cancelNo.setVisibility(android.view.View.INVISIBLE);
                 cancelYes.setVisibility(android.view.View.INVISIBLE);
