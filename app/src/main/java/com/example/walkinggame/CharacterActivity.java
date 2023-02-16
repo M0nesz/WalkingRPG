@@ -2,8 +2,8 @@ package com.example.walkinggame;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,7 +30,6 @@ public class CharacterActivity extends AppCompatActivity {
         Button cancelNo = findViewById(R.id.confirmation_no);
         Button cancelButton = findViewById(R.id.cancel_button);
         TextView saved = findViewById(R.id.saved_textview);
-        TextView error = findViewById(R.id.error);
 
         // Hide the cancel confirmation views and the saved textview initially
         cancelConfirmationTextview.setVisibility(View.INVISIBLE);
@@ -39,7 +38,6 @@ public class CharacterActivity extends AppCompatActivity {
         saved.setVisibility(View.INVISIBLE);
         // Hide the character limit textview and error textview initially
         characterLimitText.setVisibility(View.INVISIBLE);
-        error.setVisibility(View.INVISIBLE);
 
         // Set the toggle button text to show "Warrior" and "Mage"
         toggleButton.setTextOn("Warrior");
@@ -63,11 +61,17 @@ public class CharacterActivity extends AppCompatActivity {
                 DatabaseHelper dbHelper = new DatabaseHelper(this);
                 boolean success = dbHelper.insertUser(userNameString, player_class);
                 dbHelper.close();
+                saved.setVisibility(View.VISIBLE);
+                new Handler().postDelayed(() -> {
+                    Intent intent = new Intent(CharacterActivity.this, MainActivity.class);
+                    startActivity(intent);
+                }, 1000);
             } else {
                 // Display an error message if the username is too long
                 characterLimitText.setVisibility(View.VISIBLE);
             }
         });
+
 
         cancelButton.setOnClickListener(View -> {
             // Display the cancel confirmation text and buttons

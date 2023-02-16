@@ -21,39 +21,38 @@ public class MainActivity extends AppCompatActivity {
         Button log_button = findViewById(R.id.log_button);
         Button button = findViewById(R.id.button);
         TextView kecske = findViewById(R.id.name);
-        button.setOnClickListener(view -> {
             // Create an instance of the DatabaseHelper class
-            DatabaseHelper dbHelper = new DatabaseHelper(this);
+        DatabaseHelper dbHelper = new DatabaseHelper(this);
 
             // Get the user data from the database
-            Cursor userDataCursor = dbHelper.getData(1);
+        Cursor userDataCursor = dbHelper.getData(1);
 
             // Check if the Cursor object contains any data
-            if (userDataCursor != null && userDataCursor.moveToFirst()) {
+        if (userDataCursor != null && userDataCursor.moveToFirst()) {
                 // Extract the username and player_class values from the Cursor object
-                int usernameColumnIndex = userDataCursor.getColumnIndex("username");
-                int playerClassColumnIndex = userDataCursor.getColumnIndex("player_class");
+            int usernameColumnIndex = userDataCursor.getColumnIndex("username");
+            int playerClassColumnIndex = userDataCursor.getColumnIndex("player_class");
 
-                if (usernameColumnIndex >= 0 && playerClassColumnIndex >= 0) {
-                    String username = userDataCursor.getString(usernameColumnIndex);
-                    String playerClass = userDataCursor.getString(playerClassColumnIndex);
+            if (usernameColumnIndex >= 0 && playerClassColumnIndex >= 0) {
+                String username = userDataCursor.getString(usernameColumnIndex);
+                String playerClass = userDataCursor.getString(playerClassColumnIndex);
 
                     // Update the TextView with the retrieved data
-                    kecske.setText( username + "\n" + playerClass);
-                } else {
-                    // If the Cursor does not contain the necessary columns, display an error message
-                    kecske.setText("Error: database schema does not match expected schema");
-                }
+                kecske.setText( username + "\n" + playerClass);
             } else {
-                // If the Cursor is empty, display an error message
-                kecske.setText("Error: no data found in database");
+                    // If the Cursor does not contain the necessary columns, display an error message
+                kecske.setText("Error: database schema does not match expected schema");
             }
+        } else {
+                // If the Cursor is empty, display an error message
+            kecske.setText("Error: no data found in database");
+        }
 
-            // Close the Cursor and the database connection
-            assert userDataCursor != null;
-            userDataCursor.close();
-            dbHelper.close();
-        });
+        // Close the Cursor and the database connection
+        assert userDataCursor != null;
+        userDataCursor.close();
+        dbHelper.close();
+
         action_button.setOnClickListener(view -> {
 
         });
