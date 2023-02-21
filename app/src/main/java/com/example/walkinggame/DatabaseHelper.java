@@ -1,22 +1,16 @@
 package com.example.walkinggame;
 
-import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
-import java.util.ArrayList;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "save.db";
-    public static final String USER_TABLE_NAME = "user";
-    public static final String USER_COLUMN_ID = "id";
-    public static final String USER_COLUMN_USERNAME = "username";
-    public static final String USER_COLUMN_CLASS = "player_class";
+    //public static final String USER_TABLE_NAME = "user";
+    //public static final String USER_COLUMN_USERNAME = "username";
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME , null, 1);
@@ -59,23 +53,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
     public Cursor getData(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "select * from user where id="+id+"", null );
-        return res;
+        return db.rawQuery( "select * from user where id="+id+"", null );
     }
-    public int numberOfRows(){
+    /*public int numberOfRows(){
         SQLiteDatabase db = this.getReadableDatabase();
-        int numRows = (int) DatabaseUtils.queryNumEntries(db, USER_TABLE_NAME);
-        return numRows;
-    }
-    public boolean updateContact (Integer id, String username, String player_class) {
+        return (int) DatabaseUtils.queryNumEntries(db, USER_TABLE_NAME);
+    }*/
+    /*public boolean updateContact (Integer id, String username, String player_class) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("name", username);
         contentValues.put("class", player_class);
         db.update("user", contentValues, "id = ? ", new String[] { Integer.toString(id) } );
         return true;
-    }
-    public Integer deleteContact (Integer id) {
+    }*/
+    /*public Integer deleteContact (Integer id) {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete("user",
                 "id = ? ",
@@ -83,16 +75,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
     @SuppressLint("Range")
     public ArrayList<String> getAllUser() {
-        ArrayList<String> array_list = new ArrayList<String>();
+        ArrayList<String> array_list = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "select * from user", null );
+        @SuppressLint("Recycle") Cursor res =  db.rawQuery( "select * from user", null );
         res.moveToFirst();
 
-        while(res.isAfterLast() == false){
+        while(!res.isAfterLast()){
             array_list.add(res.getString(res.getColumnIndex(USER_COLUMN_USERNAME)));
             res.moveToNext();
         }
         return array_list;
-    }
+    }*/
 }
