@@ -21,7 +21,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "create table user " +
                         "(id integer primary key, username text, player_class text)"
         );
-
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

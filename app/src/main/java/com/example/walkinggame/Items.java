@@ -1,16 +1,54 @@
 package com.example.walkinggame;
 
-import android.content.Context;
-import android.util.Log;
-
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
 
 public class Items {
-
+    String[][][] weapons = {
+            {
+                {"Name", "Knife"},
+                {"Weapon type", "Melee"},
+                {"General type", "Weapon"},
+                {"Damage", "10"},
+                {"Rarity", "Common"}
+            },
+            {
+                {"Name", "Long Sword"},
+                {"Weapon type", "Melee"},
+                {"General type", "Weapon"},
+                {"Damage", "10"},
+                {"Rarity", "Common"}
+            },
+            {
+                {"Name", "Bow"},
+                {"Weapon type", "Ranged"},
+                {"General type", "Weapon"},
+                {"Damage", "10"},
+                {"Rarity", "Common"}
+            }
+    };
+    String[][][] armor = {
+            {
+                    {"Name", "Leather armor"},
+                    {"Weapon type", "Lightweight"},
+                    {"General type", "Armor"},
+                    {"Defense", "4"},
+                    {"Defense chance", "10"},
+                    {"Rarity", "Common"}
+            },
+            {
+                    {"Name", "Chain mail armor"},
+                    {"Weapon type", "Middleweight"},
+                    {"General type", "Armor"},
+                    {"Damage", "6"},
+                    {"Defense chance", "15"},
+                    {"Rarity", "Common"}
+            },
+            {
+                    {"Name", "Metal armor"},
+                    {"Weapon type", "Heavyweight"},
+                    {"General type", "Armor"},
+                    {"Damage", "10"},
+                    {"Defense chance", "20"},
+                    {"Rarity", "Common"}
+            }
+    };
 }

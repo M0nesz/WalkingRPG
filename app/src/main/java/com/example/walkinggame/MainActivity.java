@@ -8,10 +8,12 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.io.IOException;
-
 public class MainActivity extends AppCompatActivity {
 
+    public void characterActivity(){
+        Intent intent = new Intent(MainActivity.this, CharacterActivity.class);
+        startActivity(intent);
+    }
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
                 // If the Cursor is empty, display an error message
             kecske.setText("Error: no data found in database");
             Log.e("MainActivity", "Error: no data found in database");
+            characterActivity();
         }
 
         // Close the Cursor and the database connection
@@ -63,8 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
         });
         character_button.setOnClickListener(view -> {
-            Intent intent = new Intent(MainActivity.this, CharacterActivity.class);
-            startActivity(intent);
+            characterActivity();
         });
         map_button.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, MapActivity.class);

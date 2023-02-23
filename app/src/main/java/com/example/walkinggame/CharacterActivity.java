@@ -20,6 +20,8 @@ public class CharacterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.character_view_activity);
 
+
+
         // Get references to all the views in the layout
         EditText username = findViewById(R.id.userName);
         ToggleButton toggleButton = findViewById(R.id.toggleButton);
